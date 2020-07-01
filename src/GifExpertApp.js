@@ -10,14 +10,14 @@ export const GifExpertApp = () => {
 
   // const handleAdd = () => {
   //   setCategories(['HunterXhunter', ...categories])
+  //   setCategories((categories) => ['HunterXhunter', ...categories])
   // }
 
   return (
     <>
       <h2>GitExpertApp</h2>
-      <AddCategory />
+      <AddCategory setCategories={setCategories} />
       <hr />
-      {/* <button onClick={handleAdd}>Agregar</button> */}
       <ol>
         {categories.map((category) => {
           return <li key={category}>{category}</li>
