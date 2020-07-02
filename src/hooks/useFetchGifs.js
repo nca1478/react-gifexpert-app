@@ -1,17 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { getGifs } from '../helpers/getGifs'
 
-export const useFetchGifs = () => {
-  const [state, setstate] = useState({
+export const useFetchGifs = (category) => {
+  const [state, setState] = useState({
     data: [],
     loading: true
   })
 
-  setTimeout(() => {
-    setstate({
-      data: [1, 2, 3, 4, 5],
-      loading: false
+  useEffect(() => {
+    // Helper que hace petición a la api
+    getGifs(category).then((imgs) => {
+      // Se actualiza el estado con los imagenes (imgs) de la api
+      setState({
+        data: imgs,
+        loading: false
+      })
     })
-  }, 3000)
+  }, [category])
 
   return state
 }
