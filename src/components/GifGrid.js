@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { GifGridItem } from './GifGridItem'
 
 export const GifGrid = ({ category }) => {
-  const [count, setCount] = useState(0)
+  const [images, setImages] = useState([])
 
   useEffect(() => {
     getGifs()
@@ -9,7 +10,7 @@ export const GifGrid = ({ category }) => {
 
   const getGifs = async () => {
     const url =
-      'https://api.giphy.com/v1/gifs/search?api_key=DxAqAcshu6yvRMH0XKZy6mHWNkrtYQyh&q=cheeseburgers&limit=10'
+      'https://api.giphy.com/v1/gifs/search?api_key=DxAqAcshu6yvRMH0XKZy6mHWNkrtYQyh&q=rick+and+morty&limit=10'
     const resp = await fetch(url)
     const { data } = await resp.json()
     const gifs = data.map((img) => {
@@ -20,14 +21,15 @@ export const GifGrid = ({ category }) => {
       }
     })
 
-    console.log(gifs)
+    setImages(gifs)
+    // console.log(gifs)
   }
 
   return (
     <>
-      <h3>{category}</h3>
-      <h4>{count}</h4>
-      <button onClick={() => setCount(count + 1)}>Click</button>
+      {images.map((img) => {
+        return <GifGridItem key={img.id} {...img} />
+      })}
     </>
   )
 }
