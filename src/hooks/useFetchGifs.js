@@ -10,7 +10,7 @@ export const useFetchGifs = (category) => {
   useEffect(() => {
     // Helper que hace petición a la api
     getGifs(category).then((imgs) => {
-      // Se actualiza el estado con los imagenes (imgs) de la api
+      // Se actualiza el estado con las imagenes (imgs) resueltas de la api
       setState({
         data: imgs,
         loading: false
